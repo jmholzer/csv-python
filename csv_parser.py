@@ -23,10 +23,10 @@ class Reader:
         """
         """
         try:
-            first_lane = next(self.csv_file)
-            self._header = self._parse_line(first_lane)
+            first_line = next(self.csv_file)
+            self._header = self._parse_line(first_line)
         except StopIteration:
-            pass
+            raise Exception("file is empty")
 
     def __iter__(self):
         """
@@ -41,7 +41,10 @@ class Reader:
             line_values = self._parse_line(line)
             if len(line_values) == len(self._header):
                 break
-        
+
+        # remove leading and trailing whitespace from fields
+        line_values = list(map(lambda s: s.strip(), line_values))
+
         return dict(zip(self._header, line_values))
         
     def _parse_line(self, line: str) -> None:
