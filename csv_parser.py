@@ -15,6 +15,7 @@ class Reader:
 
     def __init__(self, csv_file: Iterable[str]):
         """
+
         """
         self.csv_file = csv_file
         self._init_header()
@@ -30,20 +31,18 @@ class Reader:
 
     def __iter__(self):
         """
+
         """
         return self
     
     def __next__(self):
         """
+
         """
         while True:
-            line = next(self.csv_file).strip()
-            line_values = self._parse_line(line)
+            line_values = self._parse_line(next(self.csv_file))
             if len(line_values) == len(self._header):
                 break
-
-        # remove leading and trailing whitespace from fields
-        line_values = list(map(lambda s: s.strip(), line_values))
 
         return dict(zip(self._header, line_values))
         
@@ -74,4 +73,7 @@ class Reader:
                     state = RowStates.QUOTED_FIELD
                 else:
                     state = RowStates.UNQUOTED_FIELD
+
+        # Remove trailing and leading whitespace from parsed values
+        values[:] = map(lambda s: s.strip(), values)
         return values
