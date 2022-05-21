@@ -13,19 +13,20 @@ class Reader:
     
     """
 
-    def __init__(self, csv_file: Iterable[str]):
+    def __init__(self, input_file: Iterable[str]):
         """
 
         """
-        self.csv_file = csv_file
-        self._init_header()
+        self.input_file = input_file
+        self.header = self._init_header()
 
     def _init_header(self) -> None:
         """
+        
         """
         try:
-            first_line = next(self.csv_file)
-            self._header = self._parse_line(first_line)
+            first_line = next(self.input_file)
+            return self._parse_line(first_line)
         except StopIteration:
             raise Exception("file is empty")
 
@@ -40,11 +41,11 @@ class Reader:
 
         """
         while True:
-            line_values = self._parse_line(next(self.csv_file))
-            if len(line_values) == len(self._header):
+            line_values = self._parse_line(next(self.input_file))
+            if len(line_values) == len(self.header):
                 break
 
-        return dict(zip(self._header, line_values))
+        return dict(zip(self.header, line_values))
         
     def _parse_line(self, line: str) -> None:
         """
