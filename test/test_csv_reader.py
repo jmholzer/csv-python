@@ -7,7 +7,7 @@ class TestReader(unittest.TestCase):
     
     """
     def setUp(self) -> None:
-        self.test_file = open("test_csv_parser/test.csv", "r")
+        self.test_file = open("resources/test.csv", "r")
         self.reader = Reader(self.test_file)
 
     def tearDown(self) -> None:
