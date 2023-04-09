@@ -1,5 +1,5 @@
-from typing import Iterable, List
 from enum import Enum, auto
+from typing import List, TextIO
 
 
 class RowStates(Enum):
@@ -35,7 +35,7 @@ class Reader:
         _parse_line
     """
 
-    def __init__(self, input_file: Iterable[str]):
+    def __init__(self, input_file: TextIO):
         """Initialise an object of the Reader class.
 
         Args:
