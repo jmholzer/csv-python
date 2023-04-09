@@ -33,7 +33,7 @@ class TestReader(unittest.TestCase):
         Assert that header initialisation is performed correctly.
         """
         expected = ["header1", "header2", "header,3", '"header4""']
-        result = self.reader._header
+        result = self.reader.header
         self.assertEqual(expected, result)
 
     def test_next(self) -> None:
