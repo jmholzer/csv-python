@@ -1,5 +1,5 @@
 import re
-from typing import Dict, List
+from typing import Dict, List, TextIO
 
 
 class Writer:
@@ -20,8 +20,8 @@ class Writer:
         write_row
         _format_field
     """
-    
-    def __init__(self, output_file: str, header: List[str]) -> None:
+
+    def __init__(self, output_file: TextIO, header: List[str]) -> None:
         """
         Initialise an object of the Writer class.
 
@@ -30,7 +30,7 @@ class Writer:
             header -- a list containing the column names of the output
                 CSV file in order.
         """
-        self._output_file = output_file 
+        self._output_file = output_file
         self._header = header
         self._write_header()
 
@@ -49,7 +49,10 @@ class Writer:
         Arguments:
             row -- the row to write represented as a dictionary.
         """
-        line = ",".join.([self._format_field(row[col_name]) for col_name in self._header]) + "\n"
+        line = (
+            ",".join([self._format_field(row[col_name]) for col_name in self._header])
+            + "\n"
+        )
         self._output_file.write(line)
 
     def _format_field(self, field: str) -> str:
@@ -63,7 +66,7 @@ class Writer:
         """
         if type(field) != str:
             return field
-        field = re.sub(r'(\"+)', r'"\1"', field)
+        field = re.sub(r"(\"+)", r'"\1"', field)
         if "," in field:
             field = '"' + field + '"'
         return field
