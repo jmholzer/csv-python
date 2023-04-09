@@ -9,5 +9,5 @@ To install the package and install the test suite, run:
 ```bash
 cd <project_root>
 pip install .
-
+python -m unittest discover test/
 ```
