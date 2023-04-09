@@ -1,6 +1,6 @@
 import unittest
 from csv_parser import Reader
-from pprint import pprint
+
 
 class TestReader(unittest.TestCase):
     """
