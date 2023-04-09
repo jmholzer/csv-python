@@ -19,13 +19,14 @@ class RowStates(Enum):
 class Reader:
     """
     A class to read a CSV file using a finite-state machine approach to handle
-    commas and quotes embedded in field values.
-    CSV files are assumed to use ',' as a separator, and '"' as quotes.
-    Commas enclosed in quotes are parsed as part of the value.
-    Quotes enclosed in quotes are parsed as part of the value.
+    commas and quotes embedded in field values. CSV files are assumed to use ','
+    as a separator, and '"' as quotes. Commas enclosed in quotes are parsed as
+    part of the value. Quotes enclosed in quotes are parsed as part of the value.
+
     Attributes:
         _input_file -- the file object to read from.
         header -- an in-order list of the column names of the input file.
+
     Methods:
         __init__
         _init_header
