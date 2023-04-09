@@ -1,5 +1,9 @@
 import unittest
+from pathlib import Path
+
 from csv_fsm import Reader
+
+RESOURCES_PATH = Path(__file__).parent / "resources"
 
 
 class TestReader(unittest.TestCase):
@@ -11,7 +15,7 @@ class TestReader(unittest.TestCase):
         """
         Open a file with test data before each test is run.
         """
-        self.test_file = open("test_csv_parser/test.csv", "r")
+        self.test_file = open(RESOURCES_PATH / "test.csv", "r")
         self.reader = Reader(self.test_file)
 
     def tearDown(self) -> None:
@@ -24,7 +28,7 @@ class TestReader(unittest.TestCase):
         """
         Assert that giving an empty file as input raises an exception.
         """
-        with open("test_csv_parser/empty.csv", "r") as empty_file:
+        with open(RESOURCES_PATH / "empty.csv", "r") as empty_file:
             with self.assertRaises(Exception):
                 self.reader = Reader(empty_file)
 
